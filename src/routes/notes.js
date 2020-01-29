@@ -30,8 +30,10 @@ router.post('/notes/new-note', async(req,res) =>{
 })
 
 
-router.get('/notes', (req,res) =>{
-    res.send('notas de la bbdd')
-})
+router.get('/notes', async(req,res) =>{
+    const notes = await Note.find().lean();//!!el lean hace que se rendericen!!
+    console.log(notes);
+    res.render('notes/all-notes', {notes} );
+});
 
 module.exports = router;
