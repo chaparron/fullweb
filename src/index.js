@@ -12,7 +12,7 @@ require('./database');
 require('./config/passport');
 
 //settings
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3001);
 app.set('views', path.join(__dirname, 'views'));
 app.engine('.hbs', exphbs({
     defaultLayout:'main',
@@ -37,8 +37,9 @@ app.use(flash());
 //global variables
 app.use((req, res, next) => {
     res.locals.success_msg = req.flash('success_msg');
-    res.locals.error_msg = req.flash('error_msg')
-    res.locals.error = req.flash('error')
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error');
+    res.locals.user = req.user || null;
     next();
 });
 
