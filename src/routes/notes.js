@@ -33,7 +33,7 @@ router.post('/notes/new-note', isAuthenticated, async(req,res) =>{
 
 
 router.get('/notes',  isAuthenticated, async(req,res) =>{
-    const notes = await Note.find().lean().sort({date:'desc'});//!!el lean hace que se rendericen!!
+    const notes = await Note.find().sort({date:'desc'});//!!el lean hace que se rendericen!!
     res.render('notes/all-notes', {notes} );
 });
 

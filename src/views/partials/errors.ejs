@@ -1,0 +1,33 @@
+<!-- Errores de signup-->
+<% if(typeof errors !== "undefined" && errors.length >0){ %>
+<% for (let i = 0; i < errors.length; i++) { %>
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <%= errors[i].text %>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<% } %>
+<% } %>
+
+
+<!-- Errores de signin-->
+<% if (typeof error !== "undefined" && error.length !== 0) { %>
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <%= error %>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<% } %>
+
+<!-- Creo que no se está usando-->
+<% if (typeof error_msg !== "undefined" && error_msg > 0) { %>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        error 2
+        <%= error_msg %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <% } %>
