@@ -9,7 +9,7 @@ router.get('/notes/add', isAuthenticated, (req,res) =>{
 })
 
 router.post('/notes/new-note', isAuthenticated, async(req,res) =>{
-    const { title, description } = req.body;
+    const { title, description, visibility } = req.body;
     const errors = [];
     if(!title){
         errors.push({text:'Por favor escribe un título'})
@@ -24,7 +24,8 @@ router.post('/notes/new-note', isAuthenticated, async(req,res) =>{
             description
         });
     } else {
-        const newNote = new Note({title, description});
+        const newNote = new Note({title, description, visibility});
+        newNote.author = req.user.name;
         await newNote.save();
         req.flash('success_msg', 'Note added successfully')
         res.redirect('/notes')
@@ -33,7 +34,7 @@ router.post('/notes/new-note', isAuthenticated, async(req,res) =>{
 
 
 router.get('/notes',  isAuthenticated, async(req,res) =>{
-    const notes = await Note.find().sort({date:'desc'});//!!el lean hace que se rendericen!!
+    const notes = await Note.find({$or: [{visibility: req.user._id}, {visibility: "public"} ] } ).sort({date:'desc'});//!!el lean hace que se rendericen!!
     res.render('notes/all-notes', {notes} );
 });
 
@@ -43,8 +44,8 @@ router.get('/notes/edit/:id', isAuthenticated, async (req,res)=>{
 })
 
 router.put('/notes/edit-note/:id',  isAuthenticated, async (req,res)=>{
-    const {title, description} = req.body;
-    await Note.findByIdAndUpdate(req.params.id, {title, description})
+    const {title, description, visibility} = req.body;
+    await Note.findByIdAndUpdate(req.params.id, {title, description, visibility})
     req.flash('success_msg', 'Note updated successfully')
     res.redirect('/notes');
 })

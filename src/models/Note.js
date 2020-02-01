@@ -4,6 +4,8 @@ const { Schema } = mongoose;
 const NoteSchema = new Schema({
     title: { type: String, required: true},
     description: { type: String, required: true},
+    visibility: { type: String, default: "public"},
+    author: { type: String},
     date: { type: Date, default: Date.now}
 })
 

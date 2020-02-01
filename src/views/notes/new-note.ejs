@@ -11,6 +11,12 @@
                     <input type="text" name="title" class="form-control" placeholder="Title" autofocus>
                 </div>
                 <div class="form-group">
+                    <select name="visibility" class="form-control">
+                        <option value="public" selected>Público</option>
+                        <option value="<%= user._id %>">Privado</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <textarea name="description" class="form-control" placeholder="Description"></textarea>
                 </div>
                 <div class="form-group">
